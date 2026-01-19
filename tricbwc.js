@@ -1,3 +1,10 @@
+/* ==============================================================================
+ * Javascript web component implementing tristate checkbox supporting form submit
+ * tricbwc.js
+ * Copyright 2026
+ * Created 19 Jan 2026 by Eugene Stepochkin <eugenest777@gmail.com>
+ * Released under the MIT License.
+ * ==============================================================================*/
 class TriStateCheckbox extends HTMLElement {
     static formAssociated = true;
 
@@ -206,4 +213,5 @@ window.onload=function () {
 }
 
 customElements.define('tristate-checkbox', TriStateCheckbox);
+
 
