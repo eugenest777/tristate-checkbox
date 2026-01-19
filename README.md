@@ -8,7 +8,7 @@ Add tristate-checkbox Web Component into your project with <script> tag in the `
 # Usage
 Put tristate-checkbox control likewise ordinary `<input type="checkbox">` control:
 ~~~
-<tristate-checkbox id="id" name="name"></tri-state-checkbox>
+<tristate-checkbox id="id" name="name"></tristate-checkbox>
 ~~~
 Example:
 ~~~
