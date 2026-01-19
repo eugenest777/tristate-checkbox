@@ -149,7 +149,7 @@ alert(ret)
 |top||Point top control to the group of linked controls|
 |mode|tri|Three ("tri") or two ("bi") states mode|
 # Appearance
-Checked: value=1, label "on"\
-Empty: value=0, label "off"\
-Dashed: value=-1, label "all"\
+Checked: value=1
+Empty: value=0
+Dashed: value=-1
 Gray background: disabled.
