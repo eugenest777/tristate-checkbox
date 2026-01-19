@@ -1,14 +1,14 @@
 # tristate-checkbox
 Javascript compatible Web Component for three-state checkbox supporting the indeterminate state.
 # Installation
-Add tri-state-checkbox Web Component into your project with <script> tag in the `<head>` scope:
+Add tristate-checkbox Web Component into your project with <script> tag in the `<head>` scope:
 ~~~
 <script src="tricbwc.js" type="text/javascript"></script>
 ~~~
 # Usage
-Put tri-state-checkbox control likewise ordinary `<input type="checkbox">` control:
+Put tristate-checkbox control likewise ordinary `<input type="checkbox">` control:
 ~~~
-<tri-state-checkbox id="id" name="name"></tri-state-checkbox>
+<tristate-checkbox id="id" name="name"></tri-state-checkbox>
 ~~~
 Example:
 ~~~
@@ -18,71 +18,109 @@ Example:
 <meta charset="UTF-8">
 <title>Tristate Checkbox</title>
 <style>
+
 </style>
 <script src="tricbwc.js" type="text/javascript"></script>
+
 </head>
 <body>
+
 <tristate-checkbox
       id="cb1"
       name="cb1"
-      top="tcb">
+      label="Veggies"
+      top="vcb">
   </tristate-checkbox>
   <br/>
+
 <fieldset style="display:inline-block;">
 <legend>Choose your best of three</legend>
   <tristate-checkbox
-      id="cb2"
-      name="cb2"
+      id="cb12"
+      name="cb12"
       value="-1"
-      class="tcb"
-      label="on">
+      class="vcb"
+      label="Cucumber"
+      tip="on"
+      tips="green, yellow, any">
   </tristate-checkbox>
 <br/>
+
 <tristate-checkbox
-      id="cb3"
-      name="cb3"
-      class="tcb"
-      label="on"
+      id="cb13"
+      name="cb13"
+      class="vcb"
+      tip="on"
       disabled
+      label="Tomato"
+      tip="on"
+      tips="red, green, any"
+      >
+  </tristate-checkbox>
+<br/>
+  <tristate-checkbox
+      id="cb14"
+      name="cb14"
+      class="vcb"
+      tip="on"
+      label="Onion"
+      tip="on"
+      tips="white, red, any"
       >
   </tristate-checkbox>
   </fieldset>
   <br/>
+
   <tristate-checkbox
-      id="cb12"
-      name="cb12"
-      top="tcb2">
+      id="cb2"
+      name="cb2"
+      top="fcb"
+      label="Fruits">
   </tristate-checkbox>
   <br/>
+
 <fieldset style="display:inline-block;">
 <legend>Choose your best of two</legend>
   <tristate-checkbox
-      id="cb22"
-      name="cb22"
-      class="tcb2"
+      id="cb21"
+      name="cb21"
+      class="fcb"
       mode="bi"
       value="1"
-      disabled>
+      disabled
+      label="Apple"
+      tip="on"
+      tips="red, green, any">
   </tristate-checkbox>
 <br/>
+
 <tristate-checkbox
-      id="cb32"
-      name="cb32"
-      class="tcb2"
-      label="on"
+      id="cb22"
+      name="cb22"
+      class="fcb"
+      tip="on"
       mode="bi"
-      value="1">
+      value="1"
+      label="Orange"
+      tips="green, yellow, any">
   </tristate-checkbox>
   </fieldset>
 <p></p>
 <tristate-checkbox
-      id="cb4"
-      name="cb4"
+      id="cb3"
+      name="cb3"
       value="1"
-      mode="bi">
+      mode="bi"
+      title="Title"
+      label="Basket"
+      tip="on"
+      tips="plastic, wooden, any">
   </tristate-checkbox>
-<p></p>
+  
+  <p></p>
+
 <button  onclick="showvals()">Submit</button>
+
 <script>
   function showvals() { 
   var ret="";
@@ -95,14 +133,17 @@ alert(ret)
 </script>
 </body>
 </html>
+
 ~~~
 # Attributes
 |Name	   |Default	|Description |
 |--------|---------|----------------------------------|
 |id |    |Standard access |
 |name|		  |Name for form|
-|value |0  |1 - On; 0 - Off; -1 - Undefined  |
-|label|Off |Off - no label; On - 1 - "on"; 0 - "off"; -1 - "all"|
+|value |0  |1 - on; 0 - off; -1 - undefined  |
+|label| |Label text|
+|tip|off |"on" - show corresponding description of the value|
+|tips| |List of corresponding values|
 |class||Class for stanard access and manage by top control|
 |disabled||Disables control off user access|
 |top||Point top control to the group of linked controls|
