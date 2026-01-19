@@ -2,7 +2,7 @@ class TriStateCheckbox extends HTMLElement {
     static formAssociated = true;
 
     static get observedAttributes() {
-        return ['value', 'mode', 'label'];
+        return ['value', 'mode', 'tips', 'label', 'tip'];
     }
 
     constructor() {
@@ -10,9 +10,11 @@ class TriStateCheckbox extends HTMLElement {
         this._internals = this.attachInternals();
         this.attachShadow({ mode: 'open' });
 
+        this._tips = {};
+        this._label = '';
         this._value = 0;
         this._mode = 'tri'; // tri | bi
-        this._label = 'off'; // on | off
+        this._tip = 'off'; // on | off 
         this._disabled = 0;
 
         this.shadowRoot.innerHTML = `
@@ -49,7 +51,11 @@ class TriStateCheckbox extends HTMLElement {
                     background: white;
                     color: #333;
                 }
-                .lbl {
+                .tip {
+                    background: transparent;
+                    color: #333;
+                }
+                .label {
                     background: transparent;
                     color: #333;
                 }
@@ -58,8 +64,9 @@ class TriStateCheckbox extends HTMLElement {
                     }
             </style>
             
+            <span class="label"></span>
             <div class="box"></div>
-            <span class="lbl"></span>
+            <span class="tip"></span>
             
         `;
 
@@ -69,11 +76,17 @@ class TriStateCheckbox extends HTMLElement {
     }
 
     connectedCallback() {
-        if (this.hasAttribute('disabled')) {
-            this._disabled = this.getAttribute('disabled');
+        if (this.hasAttribute('tips')) {
+            this._tips = this.getAttribute('tips').split(",");
         }
         if (this.hasAttribute('label')) {
             this._label = this.getAttribute('label');
+        }
+        if (this.hasAttribute('disabled')) {
+            this._disabled = this.getAttribute('disabled');
+        }
+        if (this.hasAttribute('tip')) {
+            this._tip = this.getAttribute('tip');
         }
         if (this.hasAttribute('mode')) {
             this._mode = this.getAttribute('mode');
@@ -85,8 +98,14 @@ class TriStateCheckbox extends HTMLElement {
     }
 
     attributeChangedCallback(name, oldVal, newVal) {
+        if (name === 'tips') {
+            this.tips = newVal;
+        }
         if (name === 'label') {
             this.label = newVal;
+        }
+        if (name === 'tip') {
+            this.tip = newVal;
         }
         if (name === 'mode') {
             this.mode = newVal;
@@ -148,20 +167,21 @@ class TriStateCheckbox extends HTMLElement {
 
     _render() {
         this.box.className = 'box';
-        this.box.nextElementSibling.style.visibility = (this._label=="off") ? 'hidden' : 'visible';
+        this.box.previousElementSibling.textContent = this._label;
+        this.box.nextElementSibling.style.visibility = (this._tip=="off") ? 'hidden' : 'visible';
         if (this.hasAttribute('disabled')) this.box.classList.add('disabled');
         if (this._value === 1) {
             this.box.classList.add('on');
             this.box.textContent = '✔';
-            this.box.nextElementSibling.textContent="on";
+            this.box.nextElementSibling.textContent=this._tips[0];
         } else if (this._value === 0) {
             this.box.classList.add('off');
             this.box.textContent = '-';
-            this.box.nextElementSibling.textContent="off";
+            this.box.nextElementSibling.textContent=this._tips[1];
         } else {
             this.box.classList.add('undefined');
             this.box.textContent = '-';
-            this.box.nextElementSibling.textContent="all";
+            this.box.nextElementSibling.textContent=this._tips[2];
         }
     }
 }
@@ -186,3 +206,4 @@ window.onload=function () {
 }
 
 customElements.define('tristate-checkbox', TriStateCheckbox);
+
